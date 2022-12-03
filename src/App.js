@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+
+import { useEffect, useState } from "react";
+import CareerBlog from "./components/CareerBlog";
+import CareerGuideline from "./components/CareerGuideline";
+import Community from "./components/Community";
+import Company from "./components/Company";
+import Courses from "./components/Courses";
+import Experts from "./components/Experts";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import Slider from "./components/Slider";
+import VideoResource from "./components/VideoResource";
 
 function App() {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav />
+      <Slider />
+      <CareerGuideline />
+      <Courses windowWidth={windowWidth } />
+      <VideoResource />
+      <Community />
+      <Experts />
+      <Company />
+      <CareerBlog windowWidth={windowWidth} />
+      <Footer/>
     </div>
   );
 }
